@@ -1,0 +1,61 @@
+<ul class="top_page">
+  <li><h3>予定一覧</h3><li>
+  <li class="container">
+    <p class="create_day"><%=link_to "新規追加", :new_myday, class: "nav-link" %></p>
+  </li>
+</ul>
+
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+  
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>タイトル</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>終日</th>
+      <th>スケジュールメモ</th>
+      <th>更新日時</th>
+      <th>詳細</th>
+      <th>編集</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @mydays.each do |myday| %>
+      <tr>
+        <td><%= myday.id %></td>
+        <td><%= myday.title %></td>
+        <td><%= myday.start_day.to_s(:date_jp) %></td>
+        <td><%= myday.end_day.to_s(:date_jp) %></td>
+        <td>
+          <% if myday.allday == true %>
+            ○
+          <% end %>
+        </td>
+        <td><%= myday.memo %></td>
+        <td><%= myday.updated_at.to_s(:datetime_jp) %></td>
+        <td>
+          <%= link_to "詳細", myday %>
+        </td>
+        <td>
+          <%= link_to "編集", [:edit, myday] %>
+        </td>
+        <td>
+          <%= link_to "削除", myday, method: :delete, data: {confirm:"本当に削除しますか?"} %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<ul class="total_data">
+  <li class="data_line_1">予定の合計 <%= @mydays_total %>件</li>
+  <li class="data_line_2">本日の日付 <%= Time.zone.today.strftime('%Y/%m/%d') %></li>
+</ul>
+
+    
