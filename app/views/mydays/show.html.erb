@@ -1,0 +1,37 @@
+<h3 class="page_title">予定の詳細</h3>
+
+<table>
+  <tr>
+    <th>タイトル</th>
+    <td><%= @myday.title %></td>
+  </tr>
+  <tr>
+    <th>開始日</th>
+    <td><%= @myday.start_day.to_s(:date_jp) %></td>
+  </tr>
+  <tr>
+    <th>終了日</th>
+    <td><%= @myday.end_day.to_s(:date_jp) %></td>
+  </tr>
+  <tr>
+    <th>終日</th>
+    <td>
+      <% if @myday.allday == true %>
+        ○
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>スケジュールメモ</th>
+    <td><%= @myday.memo %></td>
+  </tr>
+  <tr>
+    <th>更新日時</th>
+    <td><%= @myday.updated_at.to_s(:datetime_jp) %></td>
+  </tr>
+</table>
+
+<div>
+  <p><%= link_to "予定を編集する", [:edit, @myday] %></p>
+  <p><%= link_to "予定一覧に戻る", :mydays %></p>
+</div>
